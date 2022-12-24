@@ -86,6 +86,7 @@ Matrix& Matrix::transpose ()
     }
   }
   *this = Matrix (new_mat);
+  return *this;
 }
 Matrix& Matrix::vectorize ()
 {
@@ -99,6 +100,7 @@ Matrix& Matrix::vectorize ()
     }
   }
   *this = Matrix (new_mat);
+  return *this;
 }
 void Matrix::plain_print () const
 {
