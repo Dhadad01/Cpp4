@@ -24,8 +24,8 @@ class Matrix
   ~Matrix();
   int get_rows() const{return dim.rows;}
   int get_cols() const{return dim.cols;}
-  void transpose();
-  void vectorize();
+  Matrix& transpose();
+  Matrix& vectorize();
   void plain_print() const;
   int argmax();
   float sum() const;

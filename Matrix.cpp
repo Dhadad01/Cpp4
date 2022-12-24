@@ -75,7 +75,7 @@ Matrix &Matrix::operator= (const Matrix &other)
   return *this;
 }
 
-void Matrix::transpose ()
+Matrix& Matrix::transpose ()
 {
   Matrix new_mat (dim.cols, dim.rows);
   for (int i = 0; i < dim.rows; i++)
@@ -87,7 +87,7 @@ void Matrix::transpose ()
   }
   *this = Matrix (new_mat);
 }
-void Matrix::vectorize ()
+Matrix& Matrix::vectorize ()
 {
 //{{
   Matrix new_mat (dim.rows * dim.cols, 1);
