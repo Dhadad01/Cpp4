@@ -18,8 +18,8 @@ class Matrix
   Matrix operator+(const Matrix &other)const;
   Matrix operator*(const Matrix &other)const ;
   Matrix& operator*(float c);
-  float operator()(int i,int j) const;
-  float operator[](int i) const;
+  float& operator()(int i,int j);
+  float& operator[](int i);
   Matrix(const Matrix &matrix);
   ~Matrix();
   int get_rows() const{return dim.rows;}

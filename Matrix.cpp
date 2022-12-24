@@ -213,14 +213,14 @@ Matrix& Matrix::operator* (const float c)
   }
   return *this;
 }
-float Matrix::operator() (int i,int j) const
+float& Matrix::operator() (int i,int j)
 {
   if(i>dim.rows||j>dim.cols){
       throw std::domain_error("dimension error");
   }
   return _mat[i][j];
 }
-float Matrix::operator[] (int i) const
+float& Matrix::operator[] (int i)
 {
   if(i>dim.cols*dim.rows){
     throw std::domain_error("dimension error");

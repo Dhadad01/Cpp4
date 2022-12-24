@@ -7,10 +7,10 @@
 Matrix activation::relu (const Matrix &matrix)
 {
   Matrix new_mat = matrix;
-  for(int i=0;i<matrix.dim.rows;i++){
-    for(int j=0;j<matrix.dim.cols;j++){
-      if(new_mat._mat[i][j]<0){
-        new_mat._mat[i][j] = 0;
+  for(int i=0;i<matrix.get_rows();i++){
+    for(int j=0;j<matrix.get_cols();j++){
+      if(new_mat(i,j)<0){
+        new_mat(i,j) = 0;
       }
     }
   }
@@ -19,11 +19,9 @@ Matrix activation::relu (const Matrix &matrix)
 Matrix activation::softmax (const Matrix &matrix)
 {
   Matrix new_mat = matrix;
-  for(int i=0;i<matrix.dim.rows;i++){
-    for(int j=0;j<matrix.dim.cols;j++){
-      //TODO - figure out what wrong with new_mat(i,j) =
-      // std::exp(new_mat._mat[i][j])
-      new_mat._mat[i][j] = std::exp(new_mat._mat[i][j]);
+  for(int i=0;i<matrix.get_rows();i++){
+    for(int j=0;j<matrix.get_cols();j++){
+      new_mat(i,j) = std::exp(new_mat(i,j));
     }
   }
   (1/new_mat.sum())*new_mat;
