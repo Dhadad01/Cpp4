@@ -15,7 +15,7 @@ class Dense{
         activation_f ActivationFunction);
   Matrix get_weights () const;
   Matrix get_bias () const;
-  activation_f get_activation_function () const;
+  activation_f get_activation() const;
   Matrix operator()(const Matrix &matrix);
 };
 

@@ -17,7 +17,7 @@ Matrix Dense::get_bias () const
 {
   return _bias;
 }
-activation_f Dense::get_activation_function () const
+activation_f Dense::get_activation () const
 {
   return _ActivationFunction;
 }
