@@ -204,16 +204,17 @@ Matrix Matrix::operator* (const Matrix &other) const
   }
   return new_mat;
 }
-Matrix& Matrix::operator* (const float c)
+Matrix Matrix::operator* (const float c) const
 {
+  Matrix new_mat(dim.rows,dim.cols);
   for (int i = 0; i < dim.rows; i++)
   {
     for (int j = 0; j < dim.cols; j++)
     {
-      _mat[i][j] = _mat[i][j] * c;
+      new_mat._mat[i][j] = _mat[i][j] * c;
     }
   }
-  return *this;
+  return new_mat;
 }
 float& Matrix::operator() (int i,int j)
 {
@@ -227,16 +228,18 @@ float& Matrix::operator[] (int i)
   if(i>dim.cols*dim.rows){
     throw std::domain_error("dimension error");
   }
-  return _mat[(i - 1) / dim.cols][(i - 1) % dim.cols];
+  return _mat[i/dim.cols][i% dim.cols];
 }
 int Matrix::argmax ()
 {
   int ind = 0;
-  for (int i = 1; i < dim.rows * dim.cols; i++)
+  for (int i = 0; i < dim.rows; i++)
   {
-    if (_mat[i] > _mat[ind])
+    for (int j=0;j<dim.cols;j++)
     {
-      ind = i;
+      if(_mat[i][j]>_mat[ind/dim.cols][ind% dim.cols]){
+        ind = i*dim.rows+j;
+      }
     }
   }
   return ind;

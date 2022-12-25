@@ -24,6 +24,5 @@ Matrix activation::softmax (const Matrix &matrix)
       new_mat(i,j) = std::exp(new_mat(i,j));
     }
   }
-  (1/new_mat.sum())*new_mat;
-  return new_mat;
+  return new_mat*(1/new_mat.sum());
 }

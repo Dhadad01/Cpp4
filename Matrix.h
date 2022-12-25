@@ -17,7 +17,7 @@ class Matrix
   Matrix& operator+=(const Matrix &other);
   Matrix operator+(const Matrix &other)const;
   Matrix operator*(const Matrix &other)const ;
-  Matrix& operator*(float c);
+  Matrix operator*(float c) const;
   float& operator()(int i,int j);
   float& operator[](int i);
   Matrix(const Matrix &matrix);
