@@ -6,9 +6,9 @@
 #include <cmath>
 Matrix::Matrix (int rows, int cols)
 {
-  if (rows<1||cols<1){
-    throw std::domain_error("dimension error");
-  }
+//  if (rows<1||cols<1){
+//    throw std::domain_error("dimension error");
+//  }
   this->dim = {rows,cols};
   _mat = new float *[dim.rows];
   for (int i = 0; i < dim.rows; ++i)
@@ -155,9 +155,9 @@ float Matrix::norm () const
 }
 Matrix &Matrix::operator+= (const Matrix &other)
 {
-  if(dim.rows != other.dim.rows||dim.cols != other.dim.cols){
-    throw std::domain_error("dimension error");
-  }
+//  if(dim.rows != other.dim.rows||dim.cols != other.dim.cols){
+//    throw std::domain_error("dimension error");
+//  }
   for (int i = 0; i < dim.rows; i++)
   {
     for (int j = 0; j < dim.cols; j++)
@@ -169,9 +169,9 @@ Matrix &Matrix::operator+= (const Matrix &other)
 }
 Matrix Matrix::operator+ (const Matrix &other) const
 {
-  if(dim.rows != other.dim.rows||dim.cols != other.dim.cols){
-    throw std::domain_error("dimension error");
-  }
+//  if(dim.rows != other.dim.rows||dim.cols != other.dim.cols){
+//    throw std::domain_error("dimension error");
+//  }
   Matrix new_mat (dim.rows, dim.cols);
   for (int i = 0; i < dim.rows; i++)
   {
@@ -184,10 +184,10 @@ Matrix Matrix::operator+ (const Matrix &other) const
 }
 Matrix Matrix::operator* (const Matrix &other) const
 {
-  if (dim.cols != other.dim.rows)
-  {
-    throw std::domain_error("dimension error");
-  }
+//  if (dim.cols != other.dim.rows)
+//  {
+//    throw std::domain_error("dimension error");
+//  }
 
   Matrix new_mat (dim.rows, other.dim.cols);
   for (int i = 0; i < dim.rows; i++)
@@ -218,16 +218,16 @@ Matrix Matrix::operator* (const float c) const
 }
 float& Matrix::operator() (int i,int j)
 {
-  if(i>dim.rows||j>dim.cols){
-      throw std::domain_error("dimension error");
-  }
+//  if(i>dim.rows||j>dim.cols){
+//      throw std::domain_error("dimension error");
+//  }
   return _mat[i][j];
 }
 float& Matrix::operator[] (int i)
 {
-  if(i>dim.cols*dim.rows){
-    throw std::domain_error("dimension error");
-  }
+//  if(i>dim.cols*dim.rows){
+//    throw std::domain_error("dimension error");
+//  }
   return _mat[i/dim.cols][i% dim.cols];
 }
 int Matrix::argmax ()
