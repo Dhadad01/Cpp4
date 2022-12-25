@@ -32,8 +32,6 @@ const Matrix::dims bias_dims[] = {{128, 1},
 // Insert MlpNetwork class here...
 class MlpNetwork{
  private:
-  Matrix weights;
-  Matrix biases;
   Dense dences[4];
  public:
   MlpNetwork(const Matrix *weights,const Matrix *biases);

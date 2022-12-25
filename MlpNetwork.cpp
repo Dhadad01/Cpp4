@@ -15,17 +15,19 @@ MlpNetwork::MlpNetwork (const Matrix *weights,const Matrix *biases) :
 
 digit MlpNetwork::operator()(Matrix& mat)
 {
+  Matrix new_mat = mat;
+  new_mat.vectorize();
   for (int i=0;i<MLP_SIZE;i++)
   {
-    mat = dences[i](mat);
+    new_mat = dences[i](new_mat);
   }
   digit digit_1;
   digit_1.value = 0;
-  digit_1.probability = mat[0];
-  for (int i=1;i<mat.get_rows();i++){
-    if(digit_1.probability<mat[i]){
+  digit_1.probability = new_mat[0];
+  for (int i=1;i<new_mat.get_rows();i++){
+    if(digit_1.probability<new_mat[i]){
       digit_1.value = i;
-      digit_1.probability = mat[i];
+      digit_1.probability = new_mat[i];
     }
   }
   return digit_1;

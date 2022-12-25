@@ -23,6 +23,6 @@ activation_f Dense::get_activation () const
 }
 Matrix Dense::operator()(const Matrix &matrix)
 {
-  Matrix mat =  _ActivationFunction( matrix*_weights+_bias);
+  Matrix mat =  _ActivationFunction( _weights*matrix+_bias);
   return mat;
 }
