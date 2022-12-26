@@ -11,7 +11,12 @@ MlpNetwork::MlpNetwork (const Matrix *weights,const Matrix *biases) :
         Dense(weights[2],biases[2],activation::relu),
         Dense(weights[3],biases[3],activation::softmax)
     }
-{}
+{
+  if(weights[0].get_rows()!=weights[1].get_cols()||weights[1].get_rows()
+  !=weights[2].get_cols()||weights[2].get_rows()!=weights[3].get_cols()){
+    throw std::domain_error("dimension error");
+  }
+}
 
 digit MlpNetwork::operator()(const Matrix& mat )
 {
