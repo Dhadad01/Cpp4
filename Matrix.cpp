@@ -4,9 +4,11 @@
 #include <iostream>
 #include "Matrix.h"
 #include <cmath>
+#define MIN_SIZE 1
+#define ZERO_POINT_ONE 0.1
 Matrix::Matrix (int rows, int cols)
 {
-  if (rows<1||cols<1){
+  if (rows<MIN_SIZE||cols<MIN_SIZE){
     throw std::domain_error("dimension error");
   }
   this->dim = {rows,cols};
@@ -22,7 +24,7 @@ Matrix::Matrix (int rows, int cols)
 };
 
 
-Matrix::Matrix () : Matrix (1, 1)
+Matrix::Matrix () : Matrix (MIN_SIZE, MIN_SIZE)
 {}
 
 //copy constructor
@@ -94,7 +96,7 @@ Matrix& Matrix::transpose ()
 Matrix& Matrix::vectorize ()
 {
 //{{
-  Matrix new_mat (dim.rows * dim.cols, 1);
+  Matrix new_mat (dim.rows * dim.cols, MIN_SIZE);
   for (int i = 0; i < dim.rows; i++)
   {
     for (int j = 0; j < dim.cols; j++)
@@ -256,7 +258,7 @@ std::ostream& operator<< (std::ostream &os, Matrix &other)
   {
     for (int j = 0; j < other.dim.cols; j++)
     {
-      if(other(i,j)>0.1){
+      if(other(i,j)>ZERO_POINT_ONE){
         os<<"**";
       }
       else{
