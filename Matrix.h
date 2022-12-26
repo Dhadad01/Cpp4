@@ -10,7 +10,7 @@ class Matrix
    * @struct Dims
    * @brief Matrix dimensions container. Used in MlpNetwork.h and main.cpp
    */
-  //constructor
+  //constructors, constructosrs everywhere
   Matrix (int rows, int cols);
   Matrix();
   Matrix& operator=(const Matrix &other);
@@ -18,8 +18,8 @@ class Matrix
   Matrix operator+(const Matrix &other)const;
   Matrix operator*(const Matrix &other)const ;
   Matrix operator*(float c) const;
-  float& operator()(int i,int j);
-  float& operator[](int i);
+  float& operator()(int i,int j) const;
+  float& operator[](int i) const;
   Matrix(const Matrix &matrix);
   ~Matrix();
   int get_rows() const{return dim.rows;}
@@ -27,17 +27,17 @@ class Matrix
   Matrix& transpose();
   Matrix& vectorize();
   void plain_print() const;
-  int argmax();
+  int argmax() const;
   float sum() const;
   float norm() const;
-  Matrix dot(Matrix& matrix) const;
+  Matrix dot(const Matrix& matrix) const;
   struct dims
   {
       int rows, cols;
   };
   friend std::ostream& operator<<(std::ostream& os,Matrix& other);
   friend std::istream& operator>>( std::istream& is ,Matrix &matrix);
-  friend void operator*(float c,Matrix& other);
+  friend Matrix operator*(float c,Matrix& other);
  private:
   dims dim{};
   float **_mat;

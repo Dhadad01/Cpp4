@@ -13,7 +13,7 @@ MlpNetwork::MlpNetwork (const Matrix *weights,const Matrix *biases) :
     }
 {}
 
-digit MlpNetwork::operator()(Matrix& mat)
+digit MlpNetwork::operator()(const Matrix& mat )
 {
   Matrix new_mat = mat;
   new_mat.vectorize();

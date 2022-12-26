@@ -20,8 +20,11 @@ Matrix::Matrix (int rows, int cols)
     }
   }
 };
+
+
 Matrix::Matrix () : Matrix (1, 1)
 {}
+
 //copy constructor
 Matrix::Matrix (const Matrix &matrix)
 {
@@ -49,7 +52,7 @@ Matrix::~Matrix ()
   _mat = nullptr;
 }
 //allocation
-Matrix &Matrix::operator= (const Matrix &other)
+Matrix& Matrix::operator= (const Matrix &other)
 {
   if (this != &other)
   {
@@ -113,7 +116,7 @@ void Matrix::plain_print () const
     std::cout << std::endl;
   }
 }
-Matrix Matrix::dot (Matrix &matrix) const
+Matrix Matrix::dot (const Matrix &matrix) const
 {
   if (dim.rows != matrix.dim.rows || dim.cols != matrix.dim.cols)
   {
@@ -153,7 +156,7 @@ float Matrix::norm () const
   }
   return sqrt (norm);
 }
-Matrix &Matrix::operator+= (const Matrix &other)
+Matrix& Matrix::operator+= (const Matrix &other)
 {
   if(dim.rows != other.dim.rows||dim.cols != other.dim.cols){
     throw std::domain_error("dimension error");
@@ -188,7 +191,6 @@ Matrix Matrix::operator* (const Matrix &other) const
   {
     throw std::domain_error("dimension error");
   }
-
   Matrix new_mat (dim.rows, other.dim.cols);
   for (int i = 0; i < dim.rows; i++)
   {
@@ -216,21 +218,21 @@ Matrix Matrix::operator* (const float c) const
   }
   return new_mat;
 }
-float& Matrix::operator() (int i,int j)
+float& Matrix::operator() (int i,int j) const
 {
-  if(i>dim.rows||j>dim.cols){
-      throw std::domain_error("dimension error");
+  if(i>=dim.rows||j>=dim.cols||i<0||j<0){
+      throw std::out_of_range("out of range error");
   }
   return _mat[i][j];
 }
-float& Matrix::operator[] (int i)
+float& Matrix::operator[] (int i) const
 {
-  if(i>dim.cols*dim.rows){
-    throw std::domain_error("dimension error");
+  if(i>=dim.cols*dim.rows||i<0){
+    throw std::out_of_range("out of range error");
   }
   return _mat[i/dim.cols][i% dim.cols];
 }
-int Matrix::argmax ()
+int Matrix::argmax () const
 {
   int ind = 0;
   for (int i = 0; i < dim.rows; i++)
@@ -244,9 +246,9 @@ int Matrix::argmax ()
   }
   return ind;
 }
-void operator* (float c, Matrix &other)
+Matrix operator* (float c, Matrix &other)
 {
-  other*(c);
+  return other*(c);
 }
 std::ostream& operator<< (std::ostream &os, Matrix &other)
 {
@@ -273,6 +275,11 @@ std::istream& operator>>( std::istream& is ,Matrix &matrix)
     {
       is.read ((char*) &matrix._mat[i][j], sizeof (float ));
     }
+  }
+  std::streamoff k = is.tellg();
+  if (k == -1)
+  {
+    throw std::runtime_error("stream error");
   }
   return is;
 }

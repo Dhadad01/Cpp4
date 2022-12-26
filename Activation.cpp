@@ -1,7 +1,6 @@
 //
 // Created by naqni on 19/12/2022.
 //
-#include "Matrix.h"
 #include "Activation.h"
 #include "cmath"
 Matrix activation::relu (const Matrix &matrix)

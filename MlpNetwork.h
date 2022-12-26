@@ -35,6 +35,6 @@ class MlpNetwork{
   Dense dences[4];
  public:
   MlpNetwork(const Matrix *weights,const Matrix *biases);
-  digit operator()(Matrix& mat);
+  digit operator()(const Matrix& mat);
 };
 #endif // MLPNETWORK_H
